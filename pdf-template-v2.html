@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{{user_name}} 的肝龄深度报告 | Master Liv</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MASTER LIV 肝龄深度报告 PDF — v2 (with images)
+   Brand: Master Liv® 护肝营养
+   Page count: 8
+   Risk levels: red / yellow / green (controlled by {{risk_class}})
+   ============================================================ */
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: #222;
+  line-height: 1.65;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  background: #FFFFFF;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 14mm 14mm 16mm;
+  page-break-after: always;
+  position: relative;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+.page:last-child { page-break-after: auto; }
+
+/* ───── Brand header / footer ───── */
+.brand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 4mm;
+  border-bottom: 2px solid #F2B705;
+  margin-bottom: 6mm;
+}
+.brand-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: #154D45;
+}
+.brand-tagline {
+  font-size: 10px;
+  color: #1E6B5E;
+  letter-spacing: 2px;
+}
+.page-footer {
+  position: absolute;
+  bottom: 8mm;
+  left: 14mm;
+  right: 14mm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  color: #888;
+  border-top: 1px solid #eee;
+  padding-top: 3mm;
+}
+
+/* ───── Risk color theming ───── */
+.risk-red    { --risk-primary: #c0392b; --risk-accent: #e74c3c; --risk-bg: #fff3f3; --risk-soft: #fdf2e9; }
+.risk-yellow { --risk-primary: #d35400; --risk-accent: #e67e22; --risk-bg: #fffbf0; --risk-soft: #fef5e7; }
+.risk-green  { --risk-primary: #1e7e34; --risk-accent: #27ae60; --risk-bg: #f0fff5; --risk-soft: #eafaf1; }
+
+/* ============================================================
+   PAGE 1 — COVER
+   ============================================================ */
+.cover-page {
+  background: linear-gradient(135deg, #ffffff 0%, #f7faf9 100%);
+}
+.cover-decor-top {
+  position: absolute;
+  top: 0; right: 0;
+  width: 80mm; height: 80mm;
+  background: linear-gradient(135deg, #154D45, #0b3a34);
+  border-bottom-left-radius: 80mm;
+  opacity: 0.08;
+}
+.cover-decor-bottom {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 60mm; height: 60mm;
+  background: #F2B705;
+  border-top-right-radius: 60mm;
+  opacity: 0.10;
+}
+.cover-brand {
+  text-align: center;
+  margin-top: 6mm;
+  margin-bottom: 7mm;
+}
+.cover-brand-logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 6px;
+  color: #154D45;
+}
+.cover-brand-tagline {
+  font-size: 10px;
+  color: #1E6B5E;
+  letter-spacing: 4px;
+  margin-top: 2mm;
+}
+.cover-section-label {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #C49004;
+  letter-spacing: 5px;
+  margin-bottom: 3mm;
+  text-transform: uppercase;
+}
+.cover-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  color: #154D45;
+  line-height: 1.35;
+  margin-bottom: 6mm;
+}
+.cover-name {
+  font-size: 32px;
+  color: var(--risk-primary);
+}
+
+.liver-age-card {
+  margin: 0 auto 5mm;
+  width: 130mm;
+  background: linear-gradient(135deg, #154D45, #0b3a34);
+  border-radius: 14px;
+  padding: 7mm 8mm;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 24px rgba(21, 77, 69, 0.3);
+}
+.liver-age-card .label-top {
+  font-size: 10px;
+  opacity: 0.75;
+  letter-spacing: 1.5px;
+  margin-bottom: 1mm;
+}
+.liver-age-card .label-mid {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 1mm;
+}
+.liver-age-card .age-number {
+  font-size: 64px;
+  font-weight: 900;
+  color: #F2B705;
+  line-height: 1;
+  display: block;
+  margin: 1mm 0;
+}
+.liver-age-card .label-suffix {
+  font-size: 14px;
+  opacity: 0.88;
+  font-weight: 500;
+}
+.cover-comparison {
+  display: flex;
+  justify-content: center;
+  gap: 6mm;
+  margin: 0 auto 4mm;
+  width: 130mm;
+}
+.comparison-box {
+  flex: 1;
+  background: #fff;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 4mm 4mm;
+  text-align: center;
+}
+.comparison-label {
+  font-size: 9px;
+  color: #888;
+  letter-spacing: 1.5px;
+  margin-bottom: 1mm;
+  text-transform: uppercase;
+}
+.comparison-value {
+  font-size: 20px;
+  font-weight: 900;
+  color: #154D45;
+}
+.comparison-value.diff {
+  color: var(--risk-primary);
+}
+.cover-liver-image {
+  text-align: center;
+  margin: 4mm 0 3mm;
+}
+.cover-liver-image img {
+  max-width: 100mm;
+  width: 100mm;
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.18));
+}
+.risk-badge-cover {
+  display: block;
+  margin: 0 auto 6mm;
+  width: fit-content;
+  background: var(--risk-bg);
+  border: 2px solid var(--risk-accent);
+  border-radius: 30px;
+  padding: 3mm 9mm;
+  text-align: center;
+}
+.risk-badge-cover .risk-emoji { font-size: 14px; margin-right: 2mm; }
+.risk-badge-cover .risk-text {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--risk-primary);
+  letter-spacing: 1px;
+}
+.cover-meta {
+  position: absolute;
+  bottom: 14mm;
+  left: 14mm;
+  right: 14mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #777;
+  border-top: 1px solid #eee;
+  padding-top: 3mm;
+}
+.cover-meta .meta-block { text-align: left; }
+.cover-meta .meta-block.right { text-align: right; }
+.cover-meta .meta-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #999;
+  margin-bottom: 1mm;
+}
+.cover-meta .meta-value { font-size: 10px; color: #333; font-weight: 600; }
+
+/* ============================================================
+   Inner pages — shared section styles
+   ============================================================ */
+.section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #C49004;
+  margin-bottom: 2mm;
+  text-transform: uppercase;
+}
+.section-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--risk-primary);
+  line-height: 1.3;
+  margin-bottom: 4mm;
+}
+.section-divider {
+  width: 16mm;
+  height: 3px;
+  background: #F2B705;
+  margin-bottom: 5mm;
+}
+.lead-paragraph {
+  font-size: 12px;
+  line-height: 1.85;
+  color: #333;
+  margin-bottom: 4mm;
+}
+.lead-paragraph strong {
+  color: var(--risk-primary);
+  font-weight: 700;
+}
+.callout-box {
+  background: var(--risk-bg);
+  border-left: 4px solid var(--risk-accent);
+  border-radius: 0 10px 10px 0;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+}
+.callout-box .callout-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--risk-primary);
+  margin-bottom: 2mm;
+}
+.callout-box .callout-body {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #333;
+}
+.signal-grid { margin: 4mm 0; }
+.signal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  padding: 2.5mm 4mm;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-left: 3px solid var(--risk-accent);
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 2mm;
+  font-size: 11px;
+  color: #333;
+}
+.signal-item .signal-icon {
+  color: var(--risk-accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.context-card {
+  background: linear-gradient(135deg, #f7faf9, #eef5f3);
+  border: 1.5px solid #154D45;
+  border-radius: 10px;
+  padding: 4mm 5mm;
+  margin: 5mm 0;
+}
+.context-card .ctx-row {
+  font-size: 11px;
+  margin-bottom: 1.5mm;
+  color: #333;
+}
+.context-card .ctx-row strong { color: #154D45; }
+
+/* P2 inline liver image */
+.inline-liver {
+  text-align: center;
+  margin: 3mm 0 5mm;
+}
+.inline-liver img {
+  max-width: 50mm;
+  width: 50mm;
+  height: auto;
+}
+
+/* ============================================================
+   Stage flow (disease progression)
+   ============================================================ */
+.stage-flow { margin: 4mm 0; }
+.stage-row {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+  padding: 3mm 4mm;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  margin-bottom: 1.5mm;
+}
+.stage-row.stage-current {
+  background: var(--risk-bg);
+  border-color: var(--risk-accent);
+  border-left: 5px solid var(--risk-accent);
+}
+.stage-num {
+  width: 10mm;
+  height: 10mm;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+  background: #b0b0b0;
+}
+.stage-row.stage-current .stage-num { background: var(--risk-accent); }
+.stage-content { flex: 1; }
+.stage-name { font-size: 12px; font-weight: 800; color: #222; margin-bottom: 0.5mm; }
+.stage-desc { font-size: 10px; color: #666; }
+.stage-current .stage-name { color: var(--risk-primary); }
+.stage-arrow { text-align: center; font-size: 11px; color: #bbb; padding: 1mm 0; }
+.warning-box {
+  background: #fff;
+  border: 2px solid #F2B705;
+  border-radius: 10px;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+}
+.warning-box .warning-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #C49004;
+  margin-bottom: 2mm;
+}
+.warning-box .warning-body {
+  font-size: 11px;
+  line-height: 1.75;
+  color: #444;
+}
+
+/* ============================================================
+   30-day plan
+   ============================================================ */
+.plan-intro {
+  background: var(--risk-bg);
+  border-radius: 10px;
+  padding: 4mm 5mm;
+  margin-bottom: 4mm;
+  font-size: 11px;
+  color: #444;
+  line-height: 1.8;
+}
+.plan-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 4mm 5mm;
+  margin-bottom: 3mm;
+}
+.plan-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--risk-primary);
+  margin-bottom: 2.5mm;
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+}
+.plan-section-num {
+  width: 7mm;
+  height: 7mm;
+  border-radius: 50%;
+  background: var(--risk-accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.plan-item {
+  padding: 2mm 0;
+  border-bottom: 1px dashed #ececec;
+}
+.plan-item:last-child { border-bottom: none; }
+.plan-item-tag { font-size: 10px; font-weight: 700; color: #222; margin-bottom: 1mm; }
+.plan-item-action { font-size: 10px; color: #444; line-height: 1.65; }
+
+/* ============================================================
+   Bridge + trust badges (P5)
+   ============================================================ */
+.bridge-card {
+  background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+  border: 2px solid #f39c12;
+  border-radius: 14px;
+  padding: 5mm 6mm;
+  margin-bottom: 5mm;
+}
+.bridge-card.bridge-green {
+  background: linear-gradient(135deg, #f0fff5, #eafaf1);
+  border-color: #27ae60;
+}
+.bridge-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #b9770e;
+  margin-bottom: 2mm;
+}
+.bridge-card.bridge-green .bridge-title { color: #1e7e34; }
+.bridge-body {
+  font-size: 11px;
+  line-height: 1.85;
+  color: #333;
+}
+.bridge-body strong { color: #c0392b; }
+.bridge-card.bridge-green .bridge-body strong { color: #1e7e34; }
+
+.why-master-liv {
+  background: #fff;
+  border: 2px solid #154D45;
+  border-radius: 14px;
+  padding: 6mm 7mm;
+  margin-bottom: 5mm;
+}
+.why-master-liv .why-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #154D45;
+  margin-bottom: 3mm;
+}
+.why-master-liv .why-intro {
+  font-size: 11px;
+  color: #444;
+  line-height: 1.85;
+  margin-bottom: 4mm;
+}
+.why-master-liv .why-intro strong { color: #154D45; }
+.trust-badges {
+  display: flex;
+  gap: 3mm;
+  margin-top: 3mm;
+}
+.trust-badge {
+  flex: 1;
+  background: #f7faf9;
+  border-radius: 10px;
+  padding: 4mm 3mm;
+  text-align: center;
+  border: 1px solid #e0ebe9;
+}
+.trust-badge .badge-icon {
+  font-size: 24px;
+  margin-bottom: 1mm;
+}
+.trust-badge .badge-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #154D45;
+  margin-bottom: 1mm;
+}
+.trust-badge .badge-desc {
+  font-size: 9px;
+  color: #666;
+  line-height: 1.5;
+}
+.customer-count-img {
+  text-align: center;
+  margin: 4mm 0;
+}
+.customer-count-img img {
+  max-width: 110mm;
+  width: 110mm;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* ============================================================
+   段 6 Part 1 — It's What (with ingredient images)
+   ============================================================ */
+.product-hero {
+  text-align: center;
+  margin: 3mm 0 5mm;
+}
+.product-hero img {
+  max-width: 80mm;
+  width: 80mm;
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(21, 77, 69, 0.25));
+}
+.ingredient-card {
+  display: flex;
+  align-items: center;
+  gap: 5mm;
+  background: #fff;
+  border-radius: 12px;
+  padding: 5mm;
+  margin-bottom: 3mm;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1.5px solid #f0f0f0;
+}
+.ingredient-card.step-1 { background: linear-gradient(135deg, #fffbf0, #fef5e7); border-color: #f1c40f; }
+.ingredient-card.step-2 { background: linear-gradient(135deg, #f0faf8, #e8f5f1); border-color: #154D45; }
+.ingredient-image {
+  width: 28mm;
+  height: 28mm;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.ingredient-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ingredient-info { flex: 1; }
+.ingredient-step {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 1mm;
+}
+.step-1 .ingredient-step { color: #d35400; }
+.step-2 .ingredient-step { color: #154D45; }
+.ingredient-name {
+  font-size: 14px;
+  font-weight: 900;
+  color: #222;
+  margin-bottom: 1mm;
+}
+.ingredient-effect {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.6;
+}
+.order-explainer {
+  background: #f7faf9;
+  border-left: 4px solid #154D45;
+  border-radius: 0 8px 8px 0;
+  padding: 4mm 5mm;
+  margin: 4mm 0 0;
+  font-size: 11px;
+  color: #444;
+  line-height: 1.85;
+  font-style: italic;
+}
+.order-explainer strong { color: #154D45; font-style: normal; }
+
+/* ============================================================
+   段 6 Part 2 — Boxes math + Part 3 Timeline (P7)
+   ============================================================ */
+.reasoning-card {
+  background: #fff;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 4mm 5mm;
+  margin-bottom: 4mm;
+}
+.reasoning-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--risk-primary);
+  margin-bottom: 3mm;
+}
+.reasoning-list { list-style: none; padding: 0; margin: 0; }
+.reasoning-list li {
+  font-size: 11px;
+  padding: 1.5mm 0 1.5mm 5mm;
+  border-bottom: 1px dashed #ececec;
+  position: relative;
+  color: #333;
+  line-height: 1.6;
+}
+.reasoning-list li:last-child { border-bottom: none; }
+.reasoning-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--risk-accent);
+  font-weight: 900;
+  font-size: 14px;
+}
+.reasoning-list li strong { color: var(--risk-primary); }
+
+.math-box {
+  background: linear-gradient(135deg, #fffbf0, #fef9e7);
+  border: 2px dashed #C49004;
+  border-radius: 12px;
+  padding: 5mm 6mm;
+  margin: 4mm 0;
+}
+.math-box .math-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #C49004;
+  margin-bottom: 3mm;
+  text-align: center;
+}
+.math-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 1mm 0;
+  color: #333;
+}
+.math-row .math-label { color: #666; }
+.math-row .math-value { font-weight: 800; color: #154D45; }
+.math-equals {
+  margin-top: 3mm;
+  padding-top: 3mm;
+  border-top: 1.5px solid #f0e0a0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: #C49004;
+}
+
+.boxes-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8mm;
+  background: linear-gradient(135deg, #154D45, #0b3a34);
+  border-radius: 14px;
+  padding: 6mm;
+  margin: 4mm 0;
+  color: white;
+  box-shadow: 0 6px 20px rgba(21, 77, 69, 0.3);
+}
+.boxes-badge .badge-num {
+  font-size: 56px;
+  font-weight: 900;
+  color: #F2B705;
+  line-height: 1;
+}
+.boxes-badge .badge-divider {
+  width: 1px;
+  height: 22mm;
+  background: rgba(242, 183, 5, 0.4);
+}
+.boxes-badge .badge-info {
+  text-align: left;
+}
+.boxes-badge .badge-info .info-label {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  opacity: 0.75;
+  margin-bottom: 1mm;
+  text-transform: uppercase;
+}
+.boxes-badge .badge-info .info-main {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 1mm;
+  color: white;
+}
+.boxes-badge .badge-info .info-sub {
+  font-size: 10px;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+.package-image-block {
+  text-align: center;
+  margin: 4mm 0;
+}
+.package-image-block img {
+  max-width: 130mm;
+  width: 130mm;
+  height: auto;
+  border-radius: 10px;
+}
+
+.timeline-feedback {
+  background: #f7faf9;
+  border-radius: 12px;
+  padding: 5mm 5mm;
+  margin: 4mm 0;
+}
+.timeline-feedback .timeline-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #154D45;
+  margin-bottom: 3mm;
+}
+.timeline-row {
+  background: #fff;
+  border-radius: 8px;
+  padding: 3mm 4mm;
+  margin-bottom: 2mm;
+  border-left: 3px solid #F2B705;
+}
+.timeline-when {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--risk-primary);
+  margin-bottom: 1mm;
+}
+.timeline-what {
+  font-size: 10px;
+  color: #444;
+  line-height: 1.65;
+}
+
+.warning-summary {
+  background: #fff;
+  border: 1.5px solid var(--risk-accent);
+  border-radius: 10px;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+  font-size: 11px;
+  color: #444;
+  line-height: 1.75;
+  font-weight: 600;
+}
+.warning-summary strong { color: var(--risk-primary); }
+
+/* ============================================================
+   Testimonials (P8)
+   ============================================================ */
+.testimonials-intro {
+  text-align: center;
+  margin-bottom: 5mm;
+}
+.testimonials-intro .ti-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #C49004;
+  font-weight: 700;
+  margin-bottom: 2mm;
+}
+.testimonials-intro .ti-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #154D45;
+  margin-bottom: 1mm;
+}
+.testimonials-intro .ti-sub {
+  font-size: 11px;
+  color: #777;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4mm;
+  margin: 4mm 0;
+}
+.testimonial-cell {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.testimonial-cell img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.testimonial-large {
+  grid-column: span 2;
+}
+.testimonial-large img {
+  max-height: 60mm;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cta-block {
+  background: #fff;
+  border: 2.5px solid #F2B705;
+  border-radius: 14px;
+  padding: 5mm 6mm;
+  margin: 5mm 0 3mm;
+  text-align: center;
+}
+.cta-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #154D45;
+  margin-bottom: 2mm;
+}
+.cta-subtitle {
+  font-size: 11px;
+  color: #555;
+  margin-bottom: 3mm;
+  line-height: 1.7;
+}
+.cta-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 3mm 9mm;
+  border-radius: 30px;
+  letter-spacing: 1px;
+}
+.disclaimer {
+  font-size: 8.5px;
+  color: #999;
+  line-height: 1.65;
+  margin-top: 4mm;
+  padding-top: 3mm;
+  border-top: 1px solid #eee;
+}
+</style>
+</head>
+<body class="risk-{{risk_class}}">
+
+<!-- ============================================================
+     PAGE 1 — COVER
+     ============================================================ -->
+<div class="page cover-page">
+  <div class="cover-decor-top"></div>
+  <div class="cover-decor-bottom"></div>
+
+  <div class="cover-brand">
+    <div class="cover-brand-logo">MASTER LIV®</div>
+    <div class="cover-brand-tagline">护肝营养 · 先消炎 · 再补肝</div>
+  </div>
+
+  <div class="cover-section-label">PERSONALIZED LIVER AGE REPORT</div>
+  <h1 class="cover-title">
+    <span class="cover-name">{{user_name}}</span><br>
+    的肝龄深度报告
+  </h1>
+
+  <div class="liver-age-card">
+    <div class="label-top">📊 根据你的评估结果</div>
+    <div class="label-mid">你目前的肝龄评估为</div>
+    <span class="age-number">{{liver_age}}</span>
+    <div class="label-suffix">岁</div>
+  </div>
+
+  <div class="cover-comparison">
+    <div class="comparison-box">
+      <div class="comparison-label">实际年龄</div>
+      <div class="comparison-value">{{actual_age}}</div>
+    </div>
+    <div class="comparison-box">
+      <div class="comparison-label">肝龄差</div>
+      <div class="comparison-value diff">{{age_diff_display}}</div>
+    </div>
+  </div>
+
+  <div class="cover-liver-image">
+    <img src="{{liver_image_url}}" alt="{{risk_label}}">
+  </div>
+
+  <div class="risk-badge-cover">
+    <span class="risk-emoji">{{risk_emoji}}</span>
+    <span class="risk-text">{{risk_label}}</span>
+  </div>
+
+  <div class="cover-meta">
+    <div class="meta-block">
+      <div class="meta-label">姓名</div>
+      <div class="meta-value">{{user_name}}</div>
+    </div>
+    <div class="meta-block right">
+      <div class="meta-label">报告日期 · {{test_date}}</div>
+      <div class="meta-value">报告编号 · {{report_id}}</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 2 — 段 1 + 段 2 (Liver age analysis + risk signals)
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 第 1-2 段</div>
+  </div>
+
+  <div class="section-label">SECTION 1 · LIVER AGE ANALYSIS</div>
+  <h2 class="section-title">第 1 段 · 你的肝龄分析</h2>
+  <div class="section-divider"></div>
+
+  <p class="lead-paragraph">
+    {{user_name}}，你的实际年龄是 <strong>{{actual_age}} 岁</strong>，但根据你的 15 题作答与 4 题深度评估，你的肝脏目前的运作状态相当于 <strong>{{liver_age}} 岁</strong> 的水平
+    {% if is_red %}—— 比实际<strong>老了 {{age_diff_num}} 岁</strong>。{% endif %}
+    {% if is_yellow %}—— 比实际<strong>老了 {{age_diff_num}} 岁</strong>。{% endif %}
+    {% if is_green %}—— 状态<strong>非常好</strong>。{% endif %}
+  </p>
+
+  <div class="inline-liver">
+    <img src="{{liver_image_url}}" alt="{{risk_label}}">
+  </div>
+
+  {% if is_red %}
+  <div class="callout-box">
+    <div class="callout-title">🔴 关键洞察</div>
+    <div class="callout-body">
+      你的肝脏正在「<strong>慢性发炎</strong>」状态。肝脏没有痛觉神经，发炎时不会像胃痛那样让你感觉到 — 它只会用「累」「肚子胀」「睡不好」「精神差」这些容易被忽略的方式提醒你。
+    </div>
+  </div>
+  {% endif %}
+  {% if is_yellow %}
+  <div class="callout-box">
+    <div class="callout-title">🟡 关键洞察</div>
+    <div class="callout-body">
+      你的肝脏正在「<strong>初期慢性发炎</strong>」。还没到体检红字的程度，但每天的排毒、代谢、修复能力已经在悄悄下降。趁现在介入，介入成本最低。
+    </div>
+  </div>
+  {% endif %}
+  {% if is_green %}
+  <div class="callout-box">
+    <div class="callout-title">🟢 关键洞察</div>
+    <div class="callout-body">
+      恭喜，你目前状态良好。但保养跟治疗不同 —— <strong>保养是「不让自己变差」</strong>。很多今天像你一样肝龄良好的人，3-5 年后体检才发现脂肪肝、肝指数飙高。<strong>预防比治疗便宜 10 倍</strong>。
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="section-label" style="margin-top:6mm;">SECTION 2 · RISK SIGNALS</div>
+  <h2 class="section-title">
+    {% if is_red %}第 2 段 · 你的肝脏正在被这些事消耗{% endif %}
+    {% if is_yellow %}第 2 段 · 你的肝脏正被悄悄消耗{% endif %}
+    {% if is_green %}第 2 段 · 你的良好习惯{% endif %}
+  </h2>
+  <div class="section-divider"></div>
+
+  <div class="signal-grid">
+    {% for item in risk_signals %}
+    <div class="signal-item">
+      <span class="signal-icon">{% if is_green %}✓{% else %}⚠{% endif %}</span>
+      <span>{{ item }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="context-card">
+    <div class="ctx-row"><strong>📍 你的现状：</strong>{{situation_display}}</div>
+    <div class="ctx-row"><strong>🎯 你最想达成：</strong>{{outcome_display}}</div>
+    {% if obstacle_display %}
+    <div class="ctx-row"><strong>🚧 你最大的障碍：</strong>{{obstacle_display}}</div>
+    {% endif %}
+  </div>
+
+  <div class="page-footer">
+    <span>Master Liv® 肝龄深度报告</span>
+    <span>P. 2</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 3 — 段 3 (Disease progression OR Maintenance focus)
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 第 3 段</div>
+  </div>
+
+  {% if is_red %}
+  <div class="section-label">SECTION 3 · DISEASE PROGRESSION</div>
+  <h2 class="section-title">第 3 段 · 如果继续放着不管，会怎样？</h2>
+  <div class="section-divider"></div>
+  <p class="lead-paragraph">
+    肝脏发炎一旦开始，就是一条<strong>单向恶化路径</strong>。它不会自己停下来，只会一阶一阶往下走：
+  </p>
+  <div class="stage-flow">
+    <div class="stage-row stage-current">
+      <div class="stage-num">1</div>
+      <div class="stage-content">
+        <div class="stage-name">肝脏慢性发炎 · 你目前在这里</div>
+        <div class="stage-desc">疲劳、肚胀、精神差、睡不好</div>
+      </div>
+    </div>
+    <div class="stage-arrow">↓ 1～3 年</div>
+    <div class="stage-row">
+      <div class="stage-num">2</div>
+      <div class="stage-content">
+        <div class="stage-name">脂肪肝加深</div>
+        <div class="stage-desc">体检报告会出现红字</div>
+      </div>
+    </div>
+    <div class="stage-arrow">↓ 3～7 年</div>
+    <div class="stage-row">
+      <div class="stage-num">3</div>
+      <div class="stage-content">
+        <div class="stage-name">肝纤维化</div>
+        <div class="stage-desc">修复能力开始永久下降</div>
+      </div>
+    </div>
+    <div class="stage-arrow">↓ 5～15 年</div>
+    <div class="stage-row">
+      <div class="stage-num">4</div>
+      <div class="stage-content">
+        <div class="stage-name">肝硬化 / 肝功能衰竭</div>
+        <div class="stage-desc">不可逆，只能等换肝</div>
+      </div>
+    </div>
+  </div>
+  <div class="warning-box">
+    <div class="warning-title">⚠ 关键提醒</div>
+    <div class="warning-body">
+      第 1～2 阶段是<strong>完全可以逆转</strong>的。一旦进入第 3 阶段（肝纤维化），就只能「延缓」不能「逆转」了。<strong>你目前还在第 1 阶段 — 这是最佳的介入窗口。</strong>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if is_yellow %}
+  <div class="section-label">SECTION 3 · DISEASE PROGRESSION</div>
+  <h2 class="section-title">第 3 段 · 如果继续放着不管，会怎样？</h2>
+  <div class="section-divider"></div>
+  <p class="lead-paragraph">肝脏发炎一旦形成，就是一条<strong>单向恶化路径</strong>：</p>
+  <div class="stage-flow">
+    <div class="stage-row stage-current">
+      <div class="stage-num">1</div>
+      <div class="stage-content">
+        <div class="stage-name">初期慢性发炎 · 你目前在这里</div>
+        <div class="stage-desc">还没到体检红字，但代谢已下降</div>
+      </div>
+    </div>
+    <div class="stage-arrow">↓ 1～3 年</div>
+    <div class="stage-row">
+      <div class="stage-num">2</div>
+      <div class="stage-content">
+        <div class="stage-name">脂肪肝形成</div>
+        <div class="stage-desc">体检红字开始出现</div>
+      </div>
+    </div>
+    <div class="stage-arrow">↓ 3～7 年</div>
+    <div class="stage-row">
+      <div class="stage-num">3</div>
+      <div class="stage-content">
+        <div class="stage-name">肝纤维化</div>
+        <div class="stage-desc">开始不可逆</div>
+      </div>
+    </div>
+  </div>
+  <div class="warning-box">
+    <div class="warning-title">⚠ 关键提醒</div>
+    <div class="warning-body">
+      你目前还在第 1 阶段，是<strong>修复成本最低</strong>的窗口。拖到第 2 阶段，要花 3 倍时间。拖到第 3 阶段，就只能「延缓」不能「逆转」。
+    </div>
+  </div>
+  {% endif %}
+
+  {% if is_green %}
+  <div class="section-label">SECTION 3 · MAINTENANCE FOCUS</div>
+  <h2 class="section-title">第 3 段 · 维护好状态，比治疗便宜 10 倍</h2>
+  <div class="section-divider"></div>
+  <p class="lead-paragraph">
+    肝脏发炎是<strong>慢性累积</strong>的。它不会今天好好的，明天突然出事。
+  </p>
+  <p class="lead-paragraph">
+    真正可怕的是 —— 很多今天像你这样「肝龄良好」的人，因为以为没事，3～5 年后体检才发现脂肪肝、肝指数飙高。
+  </p>
+  <div class="callout-box">
+    <div class="callout-title">💡 关键洞察</div>
+    <div class="callout-body">
+      <strong>保养比治疗便宜 10 倍。</strong><br>
+      现在维护一个月的成本，等于将来发炎后修复一个礼拜的成本。
+    </div>
+  </div>
+  <div class="warning-box">
+    <div class="warning-title">🛡️ 你需要做什么？</div>
+    <div class="warning-body">
+      不需要紧急动作，但要保持<strong>规律作息 + 清淡饮食 + 适度运动</strong>。在熬夜、应酬、压力大的日子里，搭配一份「先消炎、再补肝」的天然营养品当日常防护，就足够了。
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="page-footer">
+    <span>Master Liv® 肝龄深度报告</span>
+    <span>P. 3</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 4 — 段 4 (30-day action plan)
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 第 4 段</div>
+  </div>
+
+  <div class="section-label">SECTION 4 · 30-DAY ACTION PLAN</div>
+  <h2 class="section-title">第 4 段 · 你的 30 天自然护肝计划</h2>
+  <div class="section-divider"></div>
+
+  <div class="plan-intro">
+    {% if is_green %}
+    {{user_name}}，虽然你目前状态良好，但「保养」是日常功课。下面 4 个方向是为你浓缩的轻量版，每个方向只显示<strong>跟你状况相关</strong>的建议：
+    {% else %}
+    {{user_name}}，根据你的 15 题作答，下面是为你<strong>量身设计</strong>的「30 天自然护肝改善计划」 —— 全部免费、可立即开始。每个方向只显示<strong>跟你状况相关</strong>的建议：
+    {% endif %}
+  </div>
+
+  <div class="plan-section">
+    <div class="plan-section-title"><span class="plan-section-num">1</span>🍽️ 饮食改善</div>
+    {% for item in diet_items %}
+    <div class="plan-item">
+      <div class="plan-item-tag">📍 {{ item.tag }}</div>
+      <div class="plan-item-action">👉 {{ item.action }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="plan-section">
+    <div class="plan-section-title"><span class="plan-section-num">2</span>🌙 作息与睡眠</div>
+    {% for item in sleep_items %}
+    <div class="plan-item">
+      <div class="plan-item-tag">📍 {{ item.tag }}</div>
+      <div class="plan-item-action">👉 {{ item.action }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="plan-section">
+    <div class="plan-section-title"><span class="plan-section-num">3</span>🏃 运动方案</div>
+    {% for item in exercise_items %}
+    <div class="plan-item">
+      <div class="plan-item-tag">📍 {{ item.tag }}</div>
+      <div class="plan-item-action">👉 {{ item.action }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="plan-section">
+    <div class="plan-section-title"><span class="plan-section-num">4</span>📊 监测与追踪</div>
+    <div class="plan-item">
+      <div class="plan-item-tag">📍 复检肝指数</div>
+      <div class="plan-item-action">👉 3 个月后复检 ALT、AST、GGT、胆固醇 —— 数字会告诉你身体的真相。</div>
+    </div>
+    <div class="plan-item">
+      <div class="plan-item-tag">📍 每周自我量测</div>
+      <div class="plan-item-action">👉 每周日早晨同一时间称体重 + 量腰围（吐气时量肚脐位置）。</div>
+    </div>
+    <div class="plan-item">
+      <div class="plan-item-tag">📍 1 张纸的健康日记</div>
+      <div class="plan-item-action">👉 记录：日期 / 睡眠时间 / 三餐内容 / 体重 / 腰围 —— 每周看一次趋势。</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Master Liv® 肝龄深度报告</span>
+    <span>P. 4</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 5 — 段 5 (Bridge) + 段 6 intro (Why Master Liv)
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 第 5-6 段</div>
+  </div>
+
+  {% if is_green %}
+  <div class="bridge-card bridge-green">
+    <div class="bridge-title">🌉 第 5 段 · {{user_name}}，跟你说一句</div>
+    <div class="bridge-body">
+      你目前状态良好，恭喜。但保养跟治疗不同 —— <strong>保养是「不让自己变差」</strong>。<br><br>
+      如果你希望长期保有这个好状态，特别在熬夜、应酬、压力大的日子里多一层保护 —— 可以考虑搭配一份「先消炎、再补肝」的天然营养品，作为日常防护。<br><br>
+      <strong>预防比治疗便宜 10 倍。</strong>
+    </div>
+  </div>
+  {% else %}
+  <div class="bridge-card">
+    <div class="bridge-title">🌉 第 5 段 · {{user_name}}，跟你说一句</div>
+    <div class="bridge-body">
+      把上面这 4 大方向做对，根据 <strong>2018 年 European Association for the Study of Liver</strong> 研究，<strong>70% 的脂肪肝患者</strong>在 3-6 个月内会看到肝指数自然改善。<br><br>
+      但我也知道 —— {{difficulty_line}}<br><br>
+      如果你想让这条路走得更轻松、更快 —— 可以搭配一份「<strong>先消炎、再补肝</strong>」的天然营养品当加速器。<br><br>
+      <strong>生活改善是主轴，营养品是加速器。</strong>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="why-master-liv">
+    <div class="section-label">SECTION 6 · MASTER LIV PROTOCOL</div>
+    <div class="why-title">第 6 段 · 为什么我推荐 Master Liv？</div>
+    <div class="why-intro">
+      市面上「护肝」营养品有几十款，但 <strong>90% 都做错一件事</strong> —— 直接补，没有先消炎。<br><br>
+      Master Liv 是大马少数同时做到「<strong>先消炎 → 再补肝</strong>」2 步骤的天然营养品：
+    </div>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <div class="badge-icon">🛡️</div>
+        <div class="badge-label">KKM 注册</div>
+        <div class="badge-desc">大马卫生部核准<br>安全合法</div>
+      </div>
+      <div class="trust-badge">
+        <div class="badge-icon">🌿</div>
+        <div class="badge-label">100% 天然</div>
+        <div class="badge-desc">姜黄根 + 奶蓟草<br>无人工添加</div>
+      </div>
+      <div class="trust-badge">
+        <div class="badge-icon">👥</div>
+        <div class="badge-label">3 万+ 顾客</div>
+        <div class="badge-desc">累计大马朋友<br>信赖使用</div>
+      </div>
+    </div>
+
+    <div class="customer-count-img">
+      <img src="{{trust_image_url}}" alt="3 万+ 大马顾客信赖">
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Master Liv® 肝龄深度报告</span>
+    <span>P. 5</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 6 — 段 6 Part 1 (它是什么 + 成份图)
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 第 6 段 · Part 1</div>
+  </div>
+
+  <div class="section-label">PART 1 · WHAT IS IT</div>
+  <h2 class="section-title">【1】它是什么？— 30 秒讲完</h2>
+  <div class="section-divider"></div>
+
+  <div class="product-hero">
+    <img src="{{master_liv_box_url}}" alt="Master Liv 包装盒">
+  </div>
+
+  <p class="lead-paragraph" style="text-align:center;">
+    Master Liv 不是单纯的「补品」，是一个 <strong>2 步骤天然营养品</strong>：
+  </p>
+
+  <div class="ingredient-card step-1">
+    <div class="ingredient-image">
+      <img src="{{ginger_image_url}}" alt="姜黄根 Curcumin">
+    </div>
+    <div class="ingredient-info">
+      <div class="ingredient-step">STEP 1 · 先消炎</div>
+      <div class="ingredient-name">姜黄根 Curcumin</div>
+      <div class="ingredient-effect">扑灭长期积累的肝脏慢性炎症 —— 让接下来的修复有效。</div>
+    </div>
+  </div>
+
+  <div class="ingredient-card step-2">
+    <div class="ingredient-image">
+      <img src="{{silymarin_image_url}}" alt="奶蓟草 Silymarin">
+    </div>
+    <div class="ingredient-info">
+      <div class="ingredient-step">STEP 2 · 再修复</div>
+      <div class="ingredient-name">奶蓟草 Silymarin</div>
+      <div class="ingredient-effect">促进肝细胞再生，修护受损细胞，让肝功能慢慢回升。</div>
+    </div>
+  </div>
+
+  <div class="order-explainer">
+    <strong>为什么「顺序」重要？</strong><br>
+    发炎中的肝脏吸收不了一般补品 —— 就像森林着火，先施肥没用。<strong>要先把火灭了 → 才施肥，营养成分才进得去。</strong>
+  </div>
+
+  <div class="page-footer">
+    <span>Master Liv® 肝龄深度报告</span>
+    <span>P. 6</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 7 — 段 6 Part 2 (多少盒 + 数学) + Part 3 (时间轴反馈)
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 第 6 段 · Part 2-3</div>
+  </div>
+
+  <div class="section-label">PART 2 · DOSAGE FOR YOU</div>
+  <h2 class="section-title">【2】要喝多少盒才有效？</h2>
+  <div class="section-divider"></div>
+
+  <div class="reasoning-card">
+    <div class="reasoning-title">{{user_name}}，这不是 standard package — 是按你的 input 算的：</div>
+    <ul class="reasoning-list">
+      {% for item in reasoning_bullets %}
+      <li>{{ item | safe }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="math-box">
+    <div class="math-title">📦 算给你看：1 盒多少天份？</div>
+    <div class="math-row"><span class="math-label">1 盒 Master Liv</span><span class="math-value">= 15 包</span></div>
+    <div class="math-row"><span class="math-label">推荐剂量</span><span class="math-value">每天 1 包</span></div>
+    <div class="math-row"><span class="math-label">所以 1 盒</span><span class="math-value">= 15 天份</span></div>
+    <div class="math-equals">
+      {{months}} 个月 = {{total_days}} 天 ÷ 15 = <span style="color:#c0392b;">{{recommended_boxes}} 盒</span>
+    </div>
+  </div>
+
+  <div class="boxes-badge">
+    <div class="badge-num">{{recommended_boxes}}</div>
+    <div class="badge-divider"></div>
+    <div class="badge-info">
+      <div class="info-label">为你建议</div>
+      <div class="info-main">{{recommended_boxes}} 盒 · {{months}} 个月{% if is_green %}保养{% else %}疗程{% endif %}</div>
+      <div class="info-sub">按你状况 + 完整修复周期算出来的<br>不是凭感觉报的数字</div>
+    </div>
+  </div>
+
+  <div class="package-image-block">
+    <img src="{{package_image_url}}" alt="Master Liv {{recommended_boxes}} 盒配套">
+  </div>
+
+  {% if is_red %}
+  <div class="warning-summary">
+    <strong>⚠ 重要提醒：</strong>少于 3 个月停下来 → 肝脏会回到原状，等于白做。所以 7 盒 = 完整周期的最低份量。
+  </div>
+  {% endif %}
+  {% if is_yellow %}
+  <div class="warning-summary">
+    <strong>💡 时机优势：</strong>趁现在介入，介入成本最低。拖到红字阶段，就需要 7 盒（多 1 个月巩固期）。
+  </div>
+  {% endif %}
+  {% if is_green %}
+  <div class="warning-summary">
+    <strong>🛡️ 保养建议：</strong>保养不是 forever，是周期性 —— 建议每年做 1～2 个 2 个月周期，特别在工作压力高的季节。
+  </div>
+  {% endif %}
+
+  <div class="timeline-feedback">
+    <div class="timeline-title">【3】怎么知道有没有效？— 按时间轴的真实反馈</div>
+    <div class="timeline-row">
+      <div class="timeline-when">🗓️ 第 1～2 周</div>
+      <div class="timeline-what">早上起床没那么「重」，眼睛比较亮 · 大便比较顺</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-when">🗓️ 第 1 个月</div>
+      <div class="timeline-what">下午 3-4 点的疲惫感开始减少 · 喝酒后第二天恢复比较快</div>
+    </div>
+    {% if is_red %}
+    <div class="timeline-row">
+      <div class="timeline-when">🗓️ 第 2～3 个月</div>
+      <div class="timeline-what">体检 ALT / AST / GGT 数字下降趋势（建议月底复检对照）· 腰围 / 体重微幅下降</div>
+    </div>
+    {% endif %}
+    {% if is_yellow %}
+    <div class="timeline-row">
+      <div class="timeline-when">🗓️ 第 2 个月</div>
+      <div class="timeline-what">体检 ALT / AST 数字稳定 / 略微下降 · 整个人状态轻盈一点</div>
+    </div>
+    {% endif %}
+    {% if is_green %}
+    <div class="timeline-row">
+      <div class="timeline-when">🗓️ 第 2 个月</div>
+      <div class="timeline-what">熬夜后恢复速度比较快 · 维持现在的好状态，肝指数稳定</div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="page-footer">
+    <span>Master Liv® 肝龄深度报告</span>
+    <span>P. 7</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE 8 — Testimonials + Final CTA
+     ============================================================ -->
+<div class="page">
+  <div class="brand-header">
+    <div class="brand-logo">MASTER LIV®</div>
+    <div class="brand-tagline">{{user_name}} · 真实顾客见证</div>
+  </div>
+
+  <div class="testimonials-intro">
+    <div class="ti-label">REAL CUSTOMER STORIES</div>
+    <div class="ti-title">💬 真实顾客见证</div>
+    <div class="ti-sub">他们找到了原因，执行了方案 👇</div>
+  </div>
+
+  <div class="testimonial-grid">
+    <div class="testimonial-cell testimonial-large">
+      <img src="{{testimonial_1_url}}" alt="顾客见证 1">
+    </div>
+    <div class="testimonial-cell">
+      <img src="{{testimonial_2_url}}" alt="顾客见证 2">
+    </div>
+    <div class="testimonial-cell">
+      <img src="{{testimonial_3_url}}" alt="顾客见证 3">
+    </div>
+    <div class="testimonial-cell">
+      <img src="{{testimonial_4_url}}" alt="顾客见证 4">
+    </div>
+    <div class="testimonial-cell">
+      <img src="{{testimonial_5_url}}" alt="顾客见证 5">
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <div class="cta-title">📲 跟师傅 1 对 1 咨询</div>
+    <div class="cta-subtitle">
+      已读到这里，代表你认真想改善。<br>
+      接下来这一步：跟师傅打个招呼，他会帮你看一下你的报告 + 给具体搭配建议。
+    </div>
+    <div class="cta-button">WhatsApp 师傅 →</div>
+  </div>
+
+  <div class="disclaimer">
+    ＊ 本报告所述「肝龄」为基于生活习惯与症状的健康评估指标，仅供参考，不构成医学诊断。如有具体健康疑虑，请咨询执业医师。<br>
+    ＊ Master Liv 为膳食补充品，非药物，不能替代药物治疗。<br>
+    ＊ 报告编号：{{report_id}} · 生成日期：{{test_date}} · 仅供本人使用。
+  </div>
+
+  <div class="page-footer">
+    <span>Master Liv® · 护肝营养专家</span>
+    <span>P. 8 / 8</span>
+  </div>
+</div>
+
+</body>
+</html>
